@@ -60,7 +60,7 @@ class TextmateInstaller < Thor
             when :git
               'echo "git remotes not implemented yet"'
             when :svn
-              %[svn co #{e_sh location[:url]}/#{e_sh bundle_name}.tmbundle #{e_sh install_bundles_path}/#{e_sh bundle_name}.tmbundle 2>&1]
+              %[svn co #{e_sh location[:url]}/#{e_sh URI.escape(bundle_name)}.tmbundle #{e_sh install_bundles_path}/#{e_sh bundle_name}.tmbundle 2>&1]
             when :github
               repos = find_github_bundles(denormalize_github_repo_name(bundle_name))
               
