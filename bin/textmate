@@ -19,15 +19,20 @@ class TextmateInstaller < Thor
       
       results = case location[:scm]
                 when :svn
-                  %x[svn list #{e_sh location[:url]}].map {|x| x.split(".")[0]}.select {|x| x =~ search_term}.join("\n")
+                  %x[svn list #{e_sh location[:url]}].select {|x| x =~ search_term}.map do |result|
+                    "%s - %s" % [
+                      result.split('.').first,
+                      "#{location[:url]}/#{result}"
+                    ]
+                  end.join("\n")
                 when :git
                   'git remotes not implemented yet'
                 when :github
                   find_github_bundles(search_term).map {|result|
-                    "%s (by %s)" %
+                    "%s - %s" %
                     [
                       normalize_github_repo_name(result['name']).split('.').first,
-                      result['username']
+                      git_url_from_github_result(result)
                     ]
                   }
                 end
@@ -188,6 +193,10 @@ class TextmateInstaller < Thor
     results.sort{|a,b| a['name'] <=> b['name']}
   end
   
+  def git_url_from_github_result(result)
+    "git://github.com/#{result['username']}/#{result['name']}.git"
+  end
+
 end
 
 # TODO: create a "monument to personal cleverness" by class-izing everything?
