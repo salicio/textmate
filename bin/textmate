@@ -9,8 +9,8 @@ require "yaml"
 class TextmateInstaller < Thor
   
   # CHANGED: renamed list to remote. Could there be a better name?
-  desc "remote [SEARCH]", "Lists all the matching remote bundles"
-  def remote(search_term = "")
+  desc "search [SEARCH]", "Lists all the matching remote bundles"
+  def search(search_term = "")
     search_term = Regexp.new(".*#{search_term}.*", "i")
     
     remote_bundle_locations.each do |name,location|
