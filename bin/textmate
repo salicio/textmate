@@ -13,7 +13,8 @@ class TextmateInstaller < Thor
   def search(search_term = "")
     search_term = Regexp.new(".*#{search_term}.*", "i")
     
-    remote_bundle_locations.each do |name,location|
+    remote_bundle_locations.keys.map { |key| key.to_s }.sort.each do |name|
+      location = remote_bundle_locations[name.to_sym]
       puts "\n" << name.to_s << " Remote Bundles\n" << name.to_s.gsub(/./,'-') << '---------------'
       
       results = case location[:scm]
