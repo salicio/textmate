@@ -22,7 +22,7 @@ class TextmateInstaller < Thor
                   %x[svn list #{e_sh location[:url]}].select {|x| x =~ search_term}.map do |result|
                     "%s - %s" % [
                       result.split('.').first,
-                      "#{location[:url]}/#{result}"
+                      "#{location[:url]}/#{result.chomp}"
                     ]
                   end.join("\n")
                 when :git
