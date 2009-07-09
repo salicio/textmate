@@ -130,8 +130,8 @@ class TextmateInstaller < Thor
   
   private
   def remote_bundle_locations
-    { :'Macromates Trunk'  => {:scm => :svn, :url => 'http://macromates.com/svn/Bundles/trunk/Bundles'},
-      :'Macromates Review' => {:scm => :svn, :url => 'http://macromates.com/svn/Bundles/trunk/Review/Bundles'},
+    { :'Macromates Trunk'  => {:scm => :svn, :url => 'http://svn.textmate.org/trunk/Bundles'},
+      :'Macromates Review' => {:scm => :svn, :url => 'http://svn.textmate.org/trunk/Review/Bundles'},
       
       # :'Bunch of Git Bundles' => {:scm => :git, :url => 'git://NotImplemented'},
       
